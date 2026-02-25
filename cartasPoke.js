@@ -26,6 +26,8 @@ function handleMove(e) {
 
     card.style.setProperty('--pointer-x', `${px}%`);
     card.style.setProperty('--pointer-y', `${py}%`);
+    card.style.setProperty('--background-x', `${px}%`);
+    card.style.setProperty('--background-y', `${py}%`);
     card.style.setProperty('--pointer-from-center', pointerFromCenter);
     card.style.setProperty('--pointer-from-top', py / 100);
     card.style.setProperty('--pointer-from-left', px / 100);
@@ -46,6 +48,8 @@ function handleEnd() {
     card.style.setProperty('--rotate-y', '0deg');
     card.style.setProperty('--pointer-x', '50%');
     card.style.setProperty('--pointer-y', '50%');
+    card.style.setProperty('--background-x', '50%');
+    card.style.setProperty('--background-y', '50%');
     card.classList.remove('interacting');
 }
 
@@ -53,6 +57,21 @@ card.addEventListener('mousemove', handleMove);
 card.addEventListener('touchmove', handleMove);
 card.addEventListener('mouseleave', handleEnd);
 card.addEventListener('touchend', handleEnd);
+
+const raritySelect = document.getElementById('rarity-select');
+if (raritySelect) {
+    raritySelect.addEventListener('change', (e) => {
+        const val = e.target.value;
+        card.setAttribute('data-rarity', val);
+
+        // Handle special attributes for certain rarities
+        if (val.includes('trainer gallery')) {
+            card.setAttribute('data-trainer-gallery', 'true');
+        } else {
+            card.removeAttribute('data-trainer-gallery');
+        }
+    });
+}
 
 // Random seed for cosmos effect
 const randomSeed = {
