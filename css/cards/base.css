@@ -42,6 +42,10 @@
 
 .card {
 
+  --grain: url("../../img/grain.webp");
+  --glitter: url("../../img/glitter.png");
+  --glittersize: 25%;
+
   /* place the card on a new transform layer and
   make sure it has hardward acceleration... we gun'need that! */
   -webkit-transform: translate3d(0px, 0px, 0.01px);
